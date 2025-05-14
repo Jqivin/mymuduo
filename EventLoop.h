@@ -67,7 +67,6 @@ private:
     std::unique_ptr<Channel> wakeupChannel_;
 
     ChannelList activeChannels_;  //eventLoop管理的所有的channel
-    Channel* currentActiveChannels_;        //主要做断言
 
     std::atomic_bool callingPendingFunctors_;   // 标识当前loop是否需要执行的回调操作
     std::vector<Functor> pendingFunctors_;   // 存储Loop需要执行的所有的回调操作

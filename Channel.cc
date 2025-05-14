@@ -31,7 +31,7 @@ void Channel::update()
 {
     // 通过channel所属的EventLoop,调用poller的相应方法，注册fd的events事件
     // add code todo
-    //loop_->updatechannel(this);
+    loop_->updateChannel(this);
 }
 
 /*
@@ -39,7 +39,7 @@ void Channel::update()
 */
 void Channel::remove()
 {
-    //loop_->removechannel(this);
+    loop_->removeChannel(this);
 }
 
 // fd得到poller的通知以后，处理相应的事件
