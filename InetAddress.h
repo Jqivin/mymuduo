@@ -19,6 +19,9 @@ public:
     uint16_t toPort() const;
 
     const sockaddr_in *getSockAddr() const { return &addr_; }
+    // 新用户连接用的sock地址
+    void setSockAddr(const sockaddr_in &addr){addr_ = addr;}
+
 
 private:
     sockaddr_in addr_;
