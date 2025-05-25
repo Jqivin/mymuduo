@@ -52,10 +52,10 @@ void Channel::handleEvent(TimeStamp receiveTime)
         {
             handleEventWithGuard(receiveTime);
         }
-        else
-        {
-            handleEventWithGuard(receiveTime);
-        }
+    }
+    else
+    {
+        handleEventWithGuard(receiveTime);
     }
 }
 
