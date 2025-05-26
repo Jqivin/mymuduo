@@ -3,8 +3,9 @@
 #include "noncopyable.h"
 
 #include <functional>
-#include<vector>
+#include <vector>
 #include <memory>
+#include <string>
 
 class EventLoop;
 class EventLoopThread;

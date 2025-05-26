@@ -7,6 +7,7 @@
 #include <memory>
 #include <unistd.h>
 #include <atomic>
+#include <string>
 
 class Thread : noncopyable
 {
