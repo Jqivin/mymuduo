@@ -14,10 +14,10 @@ TcpServer::TcpServer(EventLoop* loop,
         const InetAddress &listenAddr,
         const std::string &nameArg,
         Option option = kNoReusePort)
-        : loop_(loop)
+        : loop_(CheackLoopNotNull(loop))
         , name_(nameArg)
         , ipPort_(listenAddr.toIpPort())
-        , acceptor_(new Acceptor(loop,listenAddr,option))
+        , acceptor_(new Acceptor(loop,listenAddr,option == kReusePort))
         , threadPool_(new EventLoopThreadPool(loop,name_))
         , connectionCallback_()
         , messageCallback_()
@@ -25,6 +25,9 @@ TcpServer::TcpServer(EventLoop* loop,
         , started_(0)
 {
     // 设置newConnecttion回调，当有新用户连接的时候，会执行这个回调
+    acceptor_->setNewConnectionCallback(std::bind(&TcpServer::newConnection,this
+                                        ,std::placeholders::_1
+                                        ,std::placeholders::_2));
 }
 
 TcpServer::~TcpServer()
@@ -32,7 +35,21 @@ TcpServer::~TcpServer()
 
 }
 
+void TcpServer::start()
+{
+    if(started_++ == 0)
+    {
+        threadPool_->start(threadInitCallback_);
+        loop_->runInLoop(std::bind(&Acceptor::listen,acceptor_.get()));
+    }
+}
+
 void TcpServer::setThreadNums(int threadNums)
 {
-    
+    threadPool_->setThreadNum(threadNums);
 }
+
+ void TcpServer::newConnection(int sockfd, const InetAddress &peerAddr)
+ {
+
+ }
