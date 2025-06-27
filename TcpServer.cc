@@ -13,7 +13,7 @@ static EventLoop* CheackLoopNotNull(EventLoop* loop)
 TcpServer::TcpServer(EventLoop* loop,
         const InetAddress &listenAddr,
         const std::string &nameArg,
-        Option option = kNoReusePort)
+        Option option)
         : loop_(CheackLoopNotNull(loop))
         , name_(nameArg)
         , ipPort_(listenAddr.toIpPort())
