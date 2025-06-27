@@ -10,7 +10,7 @@
 */
 ssize_t Buffer::readFd(int fd,int* saveErrno)
 {
-    char extraBuf[65536] = {0}; // 从栈内存开辟64K大小的数据  为什么是64K数据？参考：
+    char extraBuf[65536] = {0}; // 从栈内存开辟64K大小的数据  为什么是64K数据？参考：https://sp9qtxrfps.feishu.cn/wiki/LZY9wGaoSiCOFekYN3xcuyXtn7e?wiki_all_space_view_source=space_sidebar&fromScene=spaceOverview
     struct iovec vec[2];
     const size_t writeable = writeableBytes(); // 这是Buffer底层缓冲区剩余的可写空间大小
     vec[0].iov_base = beginWrite();
