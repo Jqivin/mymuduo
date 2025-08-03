@@ -62,6 +62,7 @@ public:
     // 连接销毁
     void connectDestroyed();
 
+    // 回调函数，给channel设置，channel最终通过EventLoop调用回调函数回调过来
     void handleRead(TimeStamp receiveTime);
     void handleWrite();
     void handleClose();
@@ -88,12 +89,12 @@ private:
     const InetAddress peerAddr_;
 
     ConnectionCallback connectionCallback_;         // 有新连接时的回调函数
-    MessageCallback messageCallback_;       // 有读写消息时的回调函数
+    MessageCallback messageCallback_;       // 有读写消息时的回调函数  用户设置的
     WriteCompleteCallback writeCompleteCallback_;    // 消息发送完成以后的回调
     HighWaterMarkCallback highWaterMarkCallback_;
     CloseCallback closeCallback_;
     size_t highWaterMark_;
 
-    Buffer inputBuffer_;  // 接收数据的缓冲区
-    Buffer outputBuffer_; // 发送数据的缓冲区
+    Buffer inputBuffer_;  // 接收数据的缓冲区,从这里读取数据（进数据）
+    Buffer outputBuffer_; // 发送数据的缓冲区,把数据写到这里先，最终要发送出去（出数据）
 };

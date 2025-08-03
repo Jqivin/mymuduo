@@ -148,7 +148,7 @@ void EventLoop::queueInLoop(Functor cb)
     }
 
     // 唤醒相应的需要执行上面回调操作的loop的线程
-    // || callingPendingFunctors_：当前loop正在执行回调，又给当前looptian'ji
+    // || callingPendingFunctors_：当前loop正在执行回调，又给当前loop添加
     if(!isInLoopThread() || callingPendingFunctors_)
     {
         wakeup();  // 唤醒loop所在的线程
