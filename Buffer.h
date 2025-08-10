@@ -60,7 +60,12 @@ public:
     }
 
     // 把onMessage函数上报的Buffer数据，转成string类型的数据返回
-    std::string retrieveAllAsString(size_t len)
+    std::string retrieveAllAsString()
+    {
+        return retrieveAsString(readableBytes()); // 应用可读取数据的长度
+    }
+
+    std::string retrieveAsString(size_t len)
     {
         std::string result(peek(),len);
         retrieve(len);   // 上面一句把缓冲区中可读的数据，已经读取出来，这里肯定要对缓冲区进行复位操作

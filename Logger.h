@@ -71,7 +71,6 @@ public:
     // 写日志
     void log(std::string msg);
 private:
-    Logger();
 
     int loglevel_;   // 日志级别
 };
